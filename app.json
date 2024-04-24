@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "basicCarBookingApp",
+    "name": "Car Booking",
     "slug": "basicCarBookingApp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.bkabhi.basicCarBookingApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "592cd257-4bf2-40b2-9e97-0baa976608f4"
+      }
     }
   }
 }

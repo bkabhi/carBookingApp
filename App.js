@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import RideForm from './components/RideForm';
+import ThankYouScreen from './components/ThankYouScreen';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const App = () => {
+  const [showHeaderOnThankYou, setShowHeaderOnThankYou] = useState(true);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="RideForm">
+        <Stack.Screen
+          name="RideForm"
+          component={RideForm}
+          options={{ title: 'Book Car', headerShown: showHeaderOnThankYou }}
+        />
+        <Stack.Screen
+          name="ThankYou"
+          component={ThankYouScreen}
+          options={{
+            title: 'Booking Confirmed',
+            headerShown: showHeaderOnThankYou,
+            headerLeft: null, // Optionally remove back button on ThankYou screen
+          }}
+          listeners={({ navigation }) => ({
+            beforeRemove: (e) => {
+              // Update header visibility when navigating back from ThankYou to RideForm
+              setShowHeaderOnThankYou(true);
+            },
+          })}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
